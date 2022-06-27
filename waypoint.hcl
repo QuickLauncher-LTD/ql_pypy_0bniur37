@@ -13,6 +13,7 @@ app "pypy_0bniur37" {
     use "pack" {
       builder = "heroku/buildpacks:20"
       buildpacks = ["heroku/python"]
+      static_environment = ["DISABLE_COLLECTSTATIC"="1"]
       #disable_entrypoint = true
     }
     registry {
