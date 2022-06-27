@@ -4,7 +4,9 @@ project = "pypy_0bniur37"
 app "pypy_0bniur37" {
   config {
     env = {
-      DISABLE_COLLECTSTATIC=1
+      DISABLE_COLLECTSTATIC = {
+        value = 1
+      }
     }
   }
   build {
