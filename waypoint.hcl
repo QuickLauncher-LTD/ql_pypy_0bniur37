@@ -1,11 +1,4 @@
 project = "pypy_0bniur37"
-config {
-    env = {
-      DISABLE_COLLECTSTATIC = {
-        value = 1
-      }
-    }
-  }
 
 app "pypy_0bniur37" {
   
@@ -13,7 +6,6 @@ app "pypy_0bniur37" {
     use "pack" {
       builder = "heroku/buildpacks:20"
       buildpacks = ["heroku/python"]
-      static_environment = ["DISABLE_COLLECTSTATIC"="1"]
       #disable_entrypoint = true
     }
     registry {
