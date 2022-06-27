@@ -1,11 +1,17 @@
 project = "pypy_0bniur37"
 
+config {
+    env = {
+      DISABLE_COLLECTSTATIC=1
+    }
+}
 app "pypy_0bniur37" {
+  
   build {
     use "pack" {
       builder = "heroku/buildpacks:20"
       buildpacks = ["heroku/python"]
-      disable_entrypoint = true
+      #disable_entrypoint = true
     }
     registry {
       use "docker" {
