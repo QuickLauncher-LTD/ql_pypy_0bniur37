@@ -5,7 +5,7 @@ app "pypy_0bniur37" {
     use "pack" {
       builder = "heroku/buildpacks:20"
       buildpacks = ["heroku/python"]
-      disable_entrypoint = false
+      disable_entrypoint = true
     }
     registry {
       use "docker" {
