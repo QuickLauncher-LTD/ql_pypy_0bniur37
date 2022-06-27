@@ -1,12 +1,12 @@
 project = "pypy_0bniur37"
 
-config {
+
+app "pypy_0bniur37" {
+  config {
     env = {
       DISABLE_COLLECTSTATIC=1
     }
-}
-app "pypy_0bniur37" {
-  
+  }
   build {
     use "pack" {
       builder = "heroku/buildpacks:20"
