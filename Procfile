@@ -1,1 +1,1 @@
-web: gunicorn pypy_0bniur37.wsgi
+web: gunicorn ql_pypy_0bniur37.wsgi
