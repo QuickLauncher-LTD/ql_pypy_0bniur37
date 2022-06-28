@@ -80,7 +80,7 @@ jobs:
       run: |
         aws ecr get-login-password --region ${{ env.AWS_REGION }} | sudo docker login --username AWS --password-stdin ${{ env.ECR_ADDR }}
         # Waypoint build
-        sudo waypoint config set DISABLE_COLLECTSTATIC="1"
+        sudo waypoint config set DISABLE_COLLECTSTATIC=1
         sudo waypoint build -var="ecr_repo=${{ env.ECR_REPOSITORY }}" -var="image_tag=${{ env.DEPLOY_ENV }}-pypy_0bniur37-${{ env.short_sha }}"
 
   deploy:
