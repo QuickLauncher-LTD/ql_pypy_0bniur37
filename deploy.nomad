@@ -8,7 +8,7 @@ job pypy_0bniur37 {
       mode = "bridge"
       port "http" {
         static = 22110
-        to = 8080
+        to = 5000
       }
     }
 
