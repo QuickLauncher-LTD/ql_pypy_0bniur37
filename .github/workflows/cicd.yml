@@ -9,7 +9,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   NOMAD_CLUSTER: ${{ secrets.NOMAD_TEST_ADDRESS }}
-  NOMAD_TOKEN: ${{ secrets.NOMAD_TEST_TOKEN }}
+  NOMAD_TOKEN: ${{ secrets.NOMAD_DISPATCH_TOKEN }}
 
   APP_NAME:  quicklauncher       # Application 이름. Image TAG Prefix로 사용 됨
   AWS_REGION: ap-northeast-2       # AWS EKS & ECR이 위치한 AWS Region
