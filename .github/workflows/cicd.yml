@@ -114,7 +114,7 @@ jobs:
       id: deploy-nomad
       env:
         ECR_ADDR:  ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: "${{ steps.login-ecr.outputs.registry }}/ecr-${{ env.DEPLOY_ENV }}-${{ env.APP_NAME }}:${{ env.DEPLOY_ENV }}-pypy_0bniur37-${{ env.short_sha }}"
+#         IMAGE_TAG: "${{ steps.login-ecr.outputs.registry }}/ecr-${{ env.DEPLOY_ENV }}-${{ env.APP_NAME }}:${{ env.DEPLOY_ENV }}-pypy_0bniur37-${{ env.short_sha }}"
         TAG: ${{ env.DEPLOY_ENV }}-pypy_0bniur37-${{ env.short_sha }}
       run: |
         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -124,5 +124,5 @@ jobs:
         #cnt=`nomad job status -address=${{ env.NOMAD_CLUSTER }} -token=${{ env.NOMAD_TOKEN }} | grep pypy_0bniur37 | wc -l`
         # if [ ${cnt} != 0  ]; then nomad job stop -purge -token=${{ env.NOMAD_TOKEN }} -address=${{ env.NOMAD_CLUSTER }} pypy_0bniur37; fi
         # nomad job run -token=${{ env.NOMAD_TOKEN }} -address=${{ env.NOMAD_CLUSTER }} -var=image=${{ env.IMAGE_TAG }} ./deploy.nomad
-        nomad job dispatch -token=${{ env.NOMAD_TOKEN }} -address=${{ env.NOMAD_CLUSTER }} -meta serviceID="ql_pypy_0bniur37" -meta port="23232" -meta ecrTag="${{ env.TAG }}" quicklauncher
+        nomad job dispatch -token=${{ env.NOMAD_TOKEN }} -address=${{ env.NOMAD_CLUSTER }} -meta serviceID="ql_pypy_0bniur37" -meta port="23232" -meta ecrTag="${{ env.TAG }}" -meta toPort="5000" quicklauncher
 
