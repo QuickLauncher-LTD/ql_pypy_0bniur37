@@ -80,7 +80,7 @@ jobs:
       run: |
         aws ecr get-login-password --region ${{ env.AWS_REGION }} | sudo docker login --username AWS --password-stdin ${{ env.ECR_ADDR }}
         # Waypoint build
-        sudo waypoint build -plain -var="ecr_repo=${{ env.ECR_REPOSITORY }}" -var="image_tag=${{ env.DEPLOY_ENV }}-PyPy_0bniur37-${{ env.short_sha }}"
+        sudo waypoint build -plain -var="ecr_repo=${{ env.ECR_REPOSITORY }}" -var="image_tag=${{ env.DEPLOY_ENV }}-SlackBotTest_0bniur37-${{ env.short_sha }}"
 
   deploy:
     needs: build
