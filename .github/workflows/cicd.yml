@@ -54,12 +54,14 @@ jobs:
         sudo waypoint install -platform=docker -accept-tos
 
     # waypoint context 등록 및 설정
-#     - name: Waypoint context setting
-#       id: waypoint-context
-#       run: |
-#         # Waypoint Server Context 등록
-#         sudo waypoint context create -server-addr=3.38.211.125:9701 remote
-#         #waypoint context user local
+    - name: Waypoint context setting
+      id: waypoint-context
+      run: |
+        # Waypoint Server Context 등록
+        sudo waypoint context create -server-addr=3.39.251.194:9701 remote
+        export WAYPOINT_SERVER_TOKEN="HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg"
+        sudo waypoint context verify
+        #waypoint context user local
 
     # Waypoint Init
     - name: Waypoint Init
