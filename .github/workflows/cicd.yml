@@ -46,11 +46,11 @@ jobs:
         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update && sudo apt-get install waypoint
     # Docker에 waypoint 서버 설치
-    - name: Waypoint server install on docker platform
-      id: waypoint-server-install-docker
-      run: |
-        # Waypoint Server Install
-        sudo waypoint install -platform=docker -accept-tos
+#     - name: Waypoint server install on docker platform
+#       id: waypoint-server-install-docker
+#       run: |
+#         # Waypoint Server Install
+#         sudo waypoint install -platform=docker -accept-tos
 
     # waypoint context 등록 및 설정
     - name: Waypoint context setting
