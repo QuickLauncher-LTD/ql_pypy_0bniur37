@@ -58,7 +58,7 @@ jobs:
       id: waypoint-context
       run: |
         # Waypoint Server Context 등록
-        sudo waypoint context create -server-addr=3.39.251.194:9701 remote
+        sudo waypoint context create -server-addr=3.39.251.194:9701 -server-tls-skip-verify=true -server-platform=docker -server-require-auth=true remote
         sudo waypoint context use remote
         export WAYPOINT_SERVER_TOKEN="HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg"
         sudo waypoint context verify
