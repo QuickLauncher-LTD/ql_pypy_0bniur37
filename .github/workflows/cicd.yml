@@ -69,6 +69,7 @@ jobs:
       run: |
         # Waypoint 초기화
         sudo waypoint init
+        sudo chmod 777 -R /var/lib/docker
     # 난수 생성
     - name: Short sha
       run: echo "short_sha=`echo ${{github.sha}} | cut -c1-8`" >> $GITHUB_ENV
