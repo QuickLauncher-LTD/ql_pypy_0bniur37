@@ -55,7 +55,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ hashFiles('**') }}
         restore-keys: ${{ runner.os }}-
         
-    - if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
+    - if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
       name: List the state of node modules
       continue-on-error: true
       run: |
