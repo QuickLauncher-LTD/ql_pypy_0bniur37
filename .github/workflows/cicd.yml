@@ -46,22 +46,22 @@ jobs:
         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update && sudo apt-get install waypoint
     # Docker에 waypoint 서버 설치
-#     - name: Waypoint server install on docker platform
-#       id: waypoint-server-install-docker
-#       run: |
-#         # Waypoint Server Install
-#         sudo waypoint install -platform=docker -accept-tos
+    - name: Waypoint server install on docker platform
+      id: waypoint-server-install-docker
+      run: |
+        # Waypoint Server Install
+        sudo waypoint install -platform=docker -accept-tos
 
     # waypoint context 등록 및 설정
-    - name: Waypoint context setting
-      id: waypoint-context
-      run: |
-        # Waypoint Server Context 등록
-        sudo waypoint context create -server-addr=3.36.55.209:9701 -server-tls-skip-verify=true -server-platform=docker -server-auth-token=HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg -server-require-auth=true remote
-        sudo waypoint context use remote
-        export WAYPOINT_SERVER_TOKEN="HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg"
-        sudo waypoint context verify
-        #waypoint context user local
+#     - name: Waypoint context setting
+#       id: waypoint-context
+#       run: |
+#         # Waypoint Server Context 등록
+#         sudo waypoint context create -server-addr=3.36.55.209:9701 -server-tls-skip-verify=true -server-platform=docker -server-auth-token=HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg -server-require-auth=true remote
+#         sudo waypoint context use remote
+#         export WAYPOINT_SERVER_TOKEN="HZCwuUtmrrpk4RDkUa3vjvQyeyfsAxP4JrXtwkWMpcWRosZGepqbU4S5mHpuQQ96RUwTJgy4dEAeerLxoaUMaEiwZfQcg6kVUfmJYpoBEST3qQxciT5han9ab5mRJGGVJFmsshf3VQqNPTjyK5iQXTLb9HLVA2VJZfeg"
+#         sudo waypoint context verify
+#         #waypoint context user local
 
     # Waypoint Init
     - name: Waypoint Init
@@ -73,18 +73,19 @@ jobs:
     - name: Short sha
       run: echo "short_sha=`echo ${{github.sha}} | cut -c1-8`" >> $GITHUB_ENV
 
-#     # Docker Build Test
-#     - name: Set up Docker Buildx
-#       uses: docker/setup-buildx-action@v1 # buildx 설정
-
-#     - name: Build and push
-#       uses: docker/build-push-action@v2 # build-push-action 사용
-#       with:
-#         context: .
-#         push: true
-#         tags: user/app:latest
-#         cache-from: type=gha # 여기서 gha 는 Guthub Actions 용 캐시를 의미합니다.
-#         cache-to: type=gha,mode=max
+    # Docker Build Test
+    - name: Cache docker images
+      id: cache-npm
+      uses: actions/cache@v3
+      with:
+        path: |
+          /var/lib/docker
+        key: ${{ runner.os }}-build-${{ hashFiles('**') }}
+        restore-keys: ${{ runner.os }}-
+#     - if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
+#       name: List the state of node modules
+#       continue-on-error: true
+#       run: npm list
 
     # Waypoint build
     - name: Waypoint Build
