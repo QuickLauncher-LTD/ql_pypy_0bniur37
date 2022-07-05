@@ -38,30 +38,32 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     # Waypoint 설치
-#     - name: Waypoint install
-#       id: waypoint-install
-#       run: |
-#         # waypoint 설치 #1
-#         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-#         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-#         sudo apt-get update && sudo apt-get install waypoint
+    - name: Waypoint install
+      id: waypoint-install
+      run: |
+        # waypoint 설치 #1
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt-get update && sudo apt-get install waypoint
+        sudo -i
+        
     # Docker Build Test
     - name: Cache docker images
       id: cache-npm
       uses: actions/cache@v3
       with:
         path: |
-          /usr/bin/waypoint
+          /var/lib/docker
         key: ${{ runner.os }}-build-${{ hashFiles('**') }}
         restore-keys: ${{ runner.os }}-
         
-    - if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
-      name: List the state of node modules
-      continue-on-error: true
-      run: |
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        sudo apt-get update && sudo apt-get install waypoint
+#     - if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
+#       name: List the state of node modules
+#       continue-on-error: true
+#       run: |
+#         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+#         sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+#         sudo apt-get update && sudo apt-get install waypoint
         
     # Docker에 waypoint 서버 설치
     - name: Waypoint server install on docker platform
