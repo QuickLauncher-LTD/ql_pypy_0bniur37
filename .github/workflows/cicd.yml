@@ -71,6 +71,7 @@ jobs:
         sudo waypoint init
         sudo chmod 777 -R /var/lib/docker
         sudo chmod 777 -R /usr/bin/tar
+        
     # 난수 생성
     - name: Short sha
       run: echo "short_sha=`echo ${{github.sha}} | cut -c1-8`" >> $GITHUB_ENV
@@ -82,12 +83,10 @@ jobs:
       with:
         path: |
           /var/lib/docker
+          /usr/bin/tar
         key: ${{ runner.os }}-build-${{ hashFiles('**') }}
         restore-keys: ${{ runner.os }}-
-#     - if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
-#       name: List the state of node modules
-#       continue-on-error: true
-#       run: npm list
+        
 
     # Waypoint build
     - name: Waypoint Build
