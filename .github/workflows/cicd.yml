@@ -71,6 +71,7 @@ jobs:
         sudo waypoint init
         sudo chmod 777 -R /var/lib/docker
         sudo chmod 777 -R /usr/bin/tar
+        sudo chmod 777 -R /var/lib/docker/image/overlay2
         
     # 난수 생성
     - name: Short sha
